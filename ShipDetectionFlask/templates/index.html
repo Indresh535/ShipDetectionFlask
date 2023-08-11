@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Detection</title>
+    <link href="{{ url_for('static', filename='styles/bootstrap_5.3.1.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <a class="navbar-brand" href="/">
+          <img src="/static/images/ship-1.png" width="80" height="50" class="d-inline-block mx-4" alt="ship">
+          <b>Ship Detection</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="d-flex flex-row-reverse collapse navbar-collapse mx-4" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="predict">Predict</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="about">About</a>
+              </li>
+            </ul>
+          </div>
+    </nav>    
+<form>
+    <section class="container">
+        <div class="row my-4">
+            <div class="col-12 text-center">                
+            <h3>Ship  Detection Using Deep Learning</h3>
+            </div>
+        </div>
+       <div>        
+            <div class="row my-4">
+                <div class="col-6">
+                    <h1>Introduction:</h1>
+                    <p>The project aims to develop a ship detection system using Convolutional Neural Networks (CNNs). 
+                        Ship detection has applications in various fields, including maritime surveillance, environmental
+                        monitoring, and security. This report outlines the libraries, 
+                        algorithms, techniques, accuracy, loss, and model used in the project.</p>
+                        <p>Ship detection is an important task with applications in maritime surveillance, search and rescue 
+                            operations, and environmental monitoring. This project focuses on developing a ship detection system 
+                            using deep learning techniques. The goal is to identify and localize ships in images accurately and efficiently.</p>
+                </div>
+                <div class="col-6">
+                    <img src="/static/images/ship-2.png"  class="img-fluid" alt="ship">
+                </div>
+            </div>
+            
+            <div class="row my-4">
+                <div class="col-6">
+                    <b>Libraries and Technologies Used</b>
+                    <ul>
+                        <li>
+                            <b>Flask:</b>
+                            <p>A micro web framework for building the user interface and serving the application.</p>
+                        </li>
+                        <li>
+                            <b>NumPy:</b>
+                            <p>For numerical computations and array manipulation.</p>
+                        </li>
+                        <li>
+                            <b>TensorFlow:</b>
+                            <p>An open-source deep learning framework used for building and training neural networks.</p>
+                        </li>
+                        <li>
+                            <b>Keras: </b>
+                            <p>A high-level neural network API built on top of TensorFlow, simplifying model construction and training.</p>
+                        </li>
+                        <li>
+                            <b>PIL (Python Imaging Library):</b>
+                            <p>For image processing and manipulation.</p>
+                        </li>
+                        <li>
+                            <b>OpenCV:</b>
+                            <p>For computer vision tasks such as drawing bounding boxes and image manipulation.</p>
+                        </li>
+                        <li>
+                            <b>Matplotlib:</b>
+                            <p>For visualizing images and results in a graphical form.</p>
+                        </li>
+                        <li>
+                            <b>HTML/CSS:</b>
+                            <p>For creating the user interface of the web application.</p>
+                        </li>
+                        <li>
+                            <b>Scikit-learn::</b>
+                            <p>A machine learning library used for generating classification reports and evaluation metrics.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <b>Algorithm and Model</b>
+                    <ul>
+                        <li>
+                            <b>Loading Pre-trained Model: </b>
+                            <p>The project starts by loading a pre-trained ship detection model using Keras and TensorFlow.</p>
+                        </li>
+                        <li>
+                            <b>Web Interface: </b>
+                            <p>The Flask framework is used to create a user-friendly web interface. Users can upload an image and choose the step size for sliding window detection.</p>
+                        </li>
+                        <li>
+                            <b>Step Size Selection:</b>
+                            <p>The user can adjust the step size of the sliding window technique. A larger step size speeds up detection but may miss smaller ships, while a smaller step size is more accurate but slower.</p>
+                        </li>
+                        <li>
+                            <b>Image Processing: </b>
+                            <p>The uploaded image is processed using the PIL library, and the RGB image is converted into a NumPy array for further manipulation.</p>
+                        </li>
+                        <li>
+                            <b>Sliding Window Detection:</b>
+                            <p>The image is divided into patches of a specified size, and the sliding window technique is applied. For each patch, the loaded deep learning model predicts whether it contains a ship.</p>
+                        </li>
+                        <li>
+                            <b>Non-Maximum Suppression:</b>
+                            <p>To eliminate duplicate detections and improve the accuracy of detected ship coordinates, a non-maximum suppression algorithm is applied. This algorithm filters out overlapping bounding boxes and keeps only the most confident predictions.</p>
+                        </li>
+                        <li>
+                            <b>Visual Representation: </b>
+                            <p>Detected ship coordinates are used to draw bounding boxes around the ships on the image using OpenCV. The processed image is then displayed to the user through the web interface.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12">
+                    <b>Results: </b>
+                    <p>The trained model achieves an accuracy of approximately 97.75% on the test set. This indicates that the model is capable of accurately classifying ship and non-ship images. 
+                        The loss value provides insights into the model's convergence during training.</p>
+                        <p>The system is able to accurately detect and localize ships in uploaded images. The user can see both the original image and the processed image with bounding boxes drawn around the detected ships.
+                            The web interface allows users to interact with the system and observe the detection results.</p>
+                </div>                 
+                <div class="col-6">
+                    <img src="/static/images/orignal.png" class="img-fluid" alt="original">
+                </div>
+                <div class="col-6">
+                    <img src="/static/images/predicted.png" class="img-fluid" alt="predicted">
+                </div> 
+            </div> 
+            <div class="row my-4">
+                <div class="col-12">
+                    <b>Conclusion: </b>
+                    <p>The ship detection project successfully utilizes CNNs to achieve accurate classification of ships and non-ships in images. 
+                        The use of CNNs, appropriate techniques, and careful training contribute to the model's high accuracy. The detailed evaluation metrics provide valuable insights into the model's performance and its potential real-world applications.</p>
+                        <p>This project demonstrates the successful implementation of a ship detection system using deep learning 
+                            and web development technologies. By combining deep learning models with image processing techniques, the system provides an efficient and 
+                            accurate solution for ship detection in images. The web interface 
+                            enhances user interaction and allows for real-time testing of the ship detection system.</p>
+                </div>  
+            </div>  
+    </div>
+    </section>
+</form>
+
+    <script src="{{ url_for('static', filename='styles/bootstrap_5.3.1.js') }}"></script>
+</body>
+</html>

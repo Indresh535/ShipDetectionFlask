@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link href="{{ url_for('static', filename='styles/bootstrap_5.3.1.css') }}" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <a class="navbar-brand" href="/">
+          <img src="/static/images/ship-1.png" width="80" height="50" class="d-inline-block mx-4" alt="ship">
+          <b>Ship Detection</b>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="d-flex flex-row-reverse collapse navbar-collapse mx-4" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="predict">Predict</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a class="nav-link" href="about">About</a>
+              </li>
+            </ul>
+          </div>
+    </nav>
+    <form>
+        <div class="container">
+            <h5 class="my-4"> The Code outlines of network design, training process, and evaluation metrics for a ship detection model. Here's a detailed breakdown of each section:</h5>              
+            <div class="row">
+                <div class="col-12">
+                    <b>Network Design:</b>
+                    <p>The architecture of the neural network is defined using Keras Sequential API. The network consists of several convolutional layers followed by pooling layers and dropout layers to prevent overfitting.
+                    The final layers include fully connected layers and a softmax output layer for classification.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <b>Model Architecture:</b>
+                    <p>The CNN model consists of several convolutional layers, max-pooling layers, dropout layers, and 
+                        fully connected layers. It takes input images of size (80, 80, 3) representing RGB images. The output layer 
+                        has two units with a softmax activation function for binary classification (ship or non-ship).</p>
+                    <p>The model is a sequential CNN, built using the Keras framework. It comprises several layers that process 
+                        the input images in a hierarchical manner, extracting and learning relevant features.</p>
+                </div>
+                <div class="col-12">
+                    <b>Layer Details: </b><br/>
+                    <img src="/static/images/layers_details.png" class="img-fluid" alt="Layer Details">
+                    <ul>
+                        <li><b>conv2d: </b>This is the first convolutional layer with a kernel size of (3, 3) and 32 filters. 
+                            It uses the ReLU activation function. It takes an input of shape (80, 80, 3) which corresponds to an 80x80 pixel image with 3 color channels (RGB).
+                            This layer is designed to capture low-level features.</li>
+                        <li><b>max_pooling2d: </b>A max-pooling layer with a pool size of (2, 2) reduces the spatial dimensions 
+                            of the data by taking the maximum value within each 2x2 window. 
+                            This layer helps in downsampling and reducing the computational load.</li>
+                        <li><b>dropout: </b>A dropout layer with a dropout rate of 0.25. Dropout is a regularization 
+                            technique that randomly drops a 
+                            fraction of the neurons during training to prevent overfitting.</li>
+                        <li><b>conv2d_1, max_pooling2d_1, dropout_1: </b>Similar layers as above, with an increased number of filters. These layers help capture higher-level features and patterns in the data.</li>
+                        <li><b>conv2d_2, max_pooling2d_2, dropout_2: </b>Further increase in the number of filters and subsequent downsampling.</li>
+                        <li><b>conv2d_3, max_pooling2d_3, dropout_3: </b>Another convolutional block with larger kernel size (10x10) to capture larger patterns.</li>
+                        <li><b>flatten: </b>Flattening layer that transforms the multi-dimensional feature maps into a 1D vector, which is suitable for feeding into fully connected layers.</li>
+                        <li><b>dense: </b>Fully connected layer with 512 units and ReLU activation. It learns complex relationships between features.</li>
+                        <li><b>dropout_4: </b> Dropout layer applied to the dense layer to prevent overfitting.</li>
+                        <li><b>dense_1: </b>Final fully connected layer with 2 units (for binary classification) and softmax activation, producing output probabilities for each class.</li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <ul>
+                        <li><b>Total Parameters:</b>
+                            <p>The summary provides information about the number of parameters in each layer. The total trainable parameters are 532,962, which the model learns during training to optimize its performance.</p>
+                        </li>
+                        <li><b>Training and Evaluation:</b>
+                            <p>The model is compiled with a categorical cross-entropy loss function and the Stochastic Gradient Descent (SGD) optimizer. It is then trained on a training dataset (X_train and y_train) for 20 epochs. 
+                                The validation_data argument is used for validation during training. The training process is tracked through the history object.</p>
+                        </li>
+                        <li><b>Evaluation Results: </b>
+                            <p>After training, the model is evaluated on a test dataset (X_test and y_test). The evaluation returns a loss value of 
+                                approximately 0.0820 and an accuracy of 97.75%. These values provide an indication of how well the trained model performs on unseen data.</p>
+                        </li>
+                        <li><b>Accuracy Visualization:</b>
+                            <p>The code also includes visualizations of the training and validation accuracy using Matplotlib. Two plots are shown: one for accuracy and the other for loss. These plots help visualize the model's training progress and provide insights into potential overfitting.</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <img src="/static/images/modal_summary.png" class="img-fluid" alt="modal summary">
+                </div>
+                <div class="col-12">
+                    <p>Overall, the provided code snippet demonstrates the architecture, training, evaluation, and visualization of a CNN model for ship detection. It showcases the effectiveness of the model in learning features from images and making accurate predictions.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                        <b>Training:</b>
+                        <ul>
+                            <li>The network is compiled using the Stochastic Gradient Descent (SGD) optimizer and categorical cross-entropy loss function.</li>
+                            <li>The model is trained using the fit method. The training data (X_train, y_train) is provided, along with validation data (X_val, y_val) for monitoring the model's performance during training.</li>
+                            <li>The training process is run for 20 epochs, and the verbose parameter controls the level of logging.</li>
+                            <li><b>Loss Function: </b>Categorical Cross-Entropy loss is used to measure the difference between predicted and actual classes.</li>
+                            <li><b>Optimization: </b> Stochastic Gradient Descent (SGD) optimizer is used to update network weights.</li>
+                            <li><b>Training Data: </b>The model is trained using ship and non-ship images, split into training, validation, and test sets.</li>
+                            <li><b>Epochs: </b>The model is trained for 20 epochs with a learning rate of 0.01 and momentum of 0.9.</li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <img src="/static/images/Training_loss_graph.png" class="img-fluid" alt="Training">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <img src="/static/images/Training_accuracy_graph.png" class="img-fluid" alt="Accuracy">
+                </div>
+                <div class="col-6">
+                    <b>Evaluation:</b>
+                    <ul>
+                        <li>After training, the model is evaluated using the evaluate method on the test data (X_test, y_test).</li>
+                        <li>The output includes the loss and accuracy values of the evaluation.</li>
+                        <li><b>Accuracy: </b>The model's accuracy on the test set is evaluated using the evaluate method. It indicates the proportion of correctly classified instances.</li>
+                        <li><b>Loss: </b> The loss value during training and evaluation reflects the network's convergence and generalization ability.</li>
+                        <li><b>Visualization: </b>Matplotlib is used to visualize the training progress. The loss and accuracy curves show how these metrics change over epochs. 
+                            This visualization helps assess model performance and identify potential overfitting.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <b>Classification Report: </b>
+                    <p>The classification_report from the sklearn.metrics library is used to generate a detailed report of the model's performance. 
+                        It includes precision, recall, F1-score, and support for each class (ship or non-ship). Additionally, macro- and micro-averaged values are provided.</p>
+                        <p>The classification report from Scikit-learn provides detailed metrics for each class. 
+                            Metrics include precision, recall, F1-score, and support (number of instances). 
+                            These metrics offer a comprehensive understanding of the model's strengths and weaknesses.</p>
+                </div>
+                <div class="col-6">
+                    <img src="/static/images/Classification.png" class="img-fluid" alt="Classification Report">
+                </div>
+            </div>
+            <div class="row">                  
+                <div class="col-6">
+                    <img src="/static/images/Confusion_matrix.png" class="img-fluid" alt="Confusion matrix">
+                </div>
+                <div class="col-6">  
+                    <b>Techniques: </b>
+                    <ul>
+                        <li><b>Convolutional Layers: </b>These layers extract features from input images using convolutional filters.</li>
+                        <li><b>MaxPooling Layers: </b>These layers downsample feature maps, reducing computation while preserving important features.</li>
+                        <li><b>Dropout: </b>A regularization technique that randomly drops neurons during training to prevent overfitting.</li>
+                        <li><b>Softmax Activation: </b>Used in the output layer to obtain class probabilities.</li>
+                    </ul>
+                </div>
+                <div class="col-12">
+                    Overall, the provided code snippet demonstrates the architecture, training, evaluation, and visualization of a CNN model for ship detection. 
+                    It showcases the effectiveness of the model in learning features from images and making accurate predictions.
+                </div>
+            </div>
+            <div class="row">
+                <h3>Results: </h3>
+                <div class="col-12">
+                    <p>The trained model achieves an accuracy of approximately 97.75% on the test set. This indicates that the model is capable of accurately classifying ship and non-ship images. 
+                        The loss value provides insights into the model's convergence during training.</p>
+                        <p>The system is able to accurately detect and localize ships in uploaded images. The user can see both the original image and the processed image with bounding boxes drawn around the detected ships.
+                            The web interface allows users to interact with the system and observe the detection results.</p>
+                </div>  
+                <div class="col-6">
+                    <img src="/static/images/orignal.png" class="img-fluid" alt="original">
+                </div>
+                <div class="col-6">
+                    <img src="/static/images/predicted.png" class="img-fluid" alt="predicted">
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12">
+                    <b>Conclusion: </b>
+                    <p>The ship detection project successfully utilizes CNNs to achieve accurate classification of ships and non-ships in images. 
+                        The use of CNNs, appropriate techniques, and careful training contribute to the model's high accuracy. The detailed evaluation metrics provide valuable insights into the model's performance and its potential real-world applications.</p>
+                        <p>This project demonstrates the successful implementation of a ship detection system using deep learning 
+                            and web development technologies. By combining deep learning models with image processing techniques, the system provides an efficient and 
+                            accurate solution for ship detection in images. The web interface 
+                            enhances user interaction and allows for real-time testing of the ship detection system.</p>
+                </div>  
+            </div>  
+        </div>
+    </form>
+    
+    <script src="{{ url_for('static', filename='styles/bootstrap_5.3.1.js') }}"></script>
+</body>
+</html>
