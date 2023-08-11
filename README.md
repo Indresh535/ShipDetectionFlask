@@ -27,3 +27,11 @@ Open a terminal or command prompt.
 
 Run the following command to install the libraries listed in the requirements.txt file:
 pip install -r requirements.txt
+
+After Navgite to project directory
+python app.py
+
+In http://127.0.0.1:5000
+
+OutPut:
+![Home Page Image](https://github.com/Indresh535/ShipDetectionFlask/blob/main/ShipDetectionFlask/static/images/home_page.png)
